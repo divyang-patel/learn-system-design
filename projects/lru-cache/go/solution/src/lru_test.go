@@ -1,6 +1,7 @@
 package lru
 
 import (
+	"sync"
 	"testing"
 )
 
@@ -74,5 +75,25 @@ func TestLRUCache(t *testing.T) {
 		if got := obj.Get(1); got != 200 {
 			t.Errorf("Get(1) after update = %d; want 200", got)
 		}
+	})
+
+	// 🌟 BONUS: Thread Safety Test
+	t.Run("concurrent access", func(t *testing.T) {
+		obj := Constructor(100)
+		var wg sync.WaitGroup
+
+		// Spawn 100 Goroutines
+		for i := 0; i < 100; i++ {
+			wg.Add(1)
+			go func(val int) {
+				defer wg.Done()
+				// Write
+				obj.Put(val, val)
+				// Read
+				obj.Get(val)
+			}(i)
+		}
+		wg.Wait()
+		// If we reached here without a crash (go test -race), we passed!
 	})
 }

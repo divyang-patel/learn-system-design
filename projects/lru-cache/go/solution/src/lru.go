@@ -1,9 +1,13 @@
 package lru
 
-import "container/list"
+import (
+	"container/list"
+	"sync"
+)
 
 // LRUCache represents size-constrained Least Recently Used cache
 type LRUCache struct {
+	mu  sync.Mutex // The Guard
 	cap int
 	l   *list.List
 	m   map[int]*list.Element
@@ -25,6 +29,9 @@ func Constructor(capacity int) LRUCache {
 
 // Get looks up a key's value
 func (this *LRUCache) Get(key int) int {
+	this.mu.Lock()
+	defer this.mu.Unlock()
+
 	if _, ok := this.m[key]; !ok {
 		return -1
 	}
@@ -39,6 +46,9 @@ func (this *LRUCache) Get(key int) int {
 // If the key already exists, update the value.
 // If the cache is full, evict the least recently used item.
 func (this *LRUCache) Put(key int, value int) {
+	this.mu.Lock()
+	defer this.mu.Unlock()
+
 	// 1. Check if key already exists
 	//    If yes: Update the value in the list element, and MoveToFront.
 	if _, ok := this.m[key]; ok {
