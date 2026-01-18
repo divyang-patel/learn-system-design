@@ -41,7 +41,8 @@ Starter boilerplate for creating new projects with a consistent structure.
 
 | Project / Concept | Type | Tech Stack | Status | Key Learnings |
 |-------------------|------|------------|--------|---------------|
-| LRU Cache | Project| Go | 🚧 | Cache Eviction, Map+LinkedList |
+| LRU Cache | Project| Go | ✅ | Thread Safety, Map+LinkedList |
+| LFU Cache | Project | Go | 🚧 | Frequency Tracking, O(1) Complexity |
 
 ---
 *Created for teaching & continuous learning.*
