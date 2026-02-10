@@ -43,6 +43,7 @@ Starter boilerplate for creating new projects with a consistent structure.
 |-------------------|------|------------|--------|---------------|
 | LRU Cache | Project| Go | ✅ | Thread Safety, Map+LinkedList |
 | LFU Cache | Project | Go | 🚧 | Frequency Tracking, O(1) Complexity |
+| Kth Largest | Project | Go | 🚧 | Min-Heaps, Streaming Data |
 
 ---
 *Created for teaching & continuous learning.*
